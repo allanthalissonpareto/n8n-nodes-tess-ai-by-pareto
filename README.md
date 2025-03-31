@@ -1,46 +1,87 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+# n8n-nodes-tess-ai-by-pareto
 
-# n8n-nodes-starter
+Community node para integração da Tess AI com o n8n.
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](n8n.io). It includes the node linter and other dependencies.
+Este node permite interações diretas com os principais recursos da Tess AI:
+- Agentes (execução, listagem, detalhes, resposta)
+- Arquivos (upload, listagem, leitura, processamento e exclusão)
+- Webhooks (criação, listagem e remoção)
 
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+---
 
-## Prerequisites
+## 📦 Instalação
 
-You need the following installed on your development machine:
+Para instalar este pacote em uma instância self-hosted do n8n:
 
-* [git](https://git-scm.com/downloads)
-* Node.js and pnpm. Minimum version Node 18. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
-  ```
-  pnpm install n8n -g
-  ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+```bash
+npm install n8n-nodes-tess-ai-by-pareto
+```
 
-## Using this starter
+> Certifique-se de estar no diretório `.n8n/custom` e que seu ambiente esteja configurado para aceitar nodes personalizados.
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+---
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-   ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
-   ```
-3. Run `pnpm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `pnpm lint` to check for errors or `pnpm lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+## 🔐 Autenticação
 
-## More information
+Este node usa **Bearer Token** da API Tess.
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+1. Vá até o menu de credenciais no n8n
+2. Adicione uma nova credencial "Tess API"
+3. Informe sua **API Key** obtida em [https://tess.pareto.io](https://tess.pareto.io)
 
-## License
+---
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+## 🧩 Nodes Disponíveis
+
+### 🔹 Tess Agents
+- Executar Agente (`POST /agents/{id}/execute`)
+- Listar Agentes (`GET /agents`)
+- Detalhar Agente (`GET /agents/{id}`)
+- Obter Resposta da Execução (`GET /agent-responses/{id}`)
+
+### 🔹 Tess Files
+- Upload de Arquivo (`POST /files`)
+- Listar Arquivos (`GET /files`)
+- Detalhar Arquivo (`GET /files/{fileId}`)
+- Remover Arquivo (`DELETE /files/{fileId}`)
+- Processar Arquivo (`POST /files/{fileId}/process`)
+
+### 🔹 Tess Webhooks
+- Criar Webhook (`POST /agents/{id}/webhooks`)
+- Listar Webhooks (`GET /webhooks` ou `GET /agents/{id}/webhooks`)
+- Remover Webhook (`DELETE /webhooks/{id}`)
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+n8n-nodes-tess-ai/
+├── credentials/
+│   └── tessApi.credentials.ts
+├── nodes/
+│   ├── Agents/
+│   ├── Files/
+│   └── Webhooks/
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+---
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Se você deseja melhorar este node ou adicionar novas funcionalidades:
+
+1. Faça um fork do projeto
+2. Crie uma branch (`git checkout -b feature/nova-funcionalidade`)
+3. Commit suas mudanças (`git commit -m 'feat: adiciona nova funcionalidade'`)
+4. Faça push para a branch
+5. Abra um Pull Request
+
+---
+
+## 📄 Licença
+
+MIT © Pareto

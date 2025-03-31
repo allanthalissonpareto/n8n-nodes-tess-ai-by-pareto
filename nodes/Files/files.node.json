@@ -1,0 +1,107 @@
+{
+  "name": "files",
+  "displayName": "Tess Files",
+  "group": ["input"],
+  "version": 1,
+  "description": "Gerencia arquivos e vínculos com agentes na Tess AI",
+  "defaults": {
+    "name": "Tess Files",
+    "color": "#0984e3"
+  },
+  "inputs": ["main"],
+  "outputs": ["main"],
+  "credentials": [
+    {
+      "name": "tessApi",
+      "required": true
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Operação",
+      "name": "operation",
+      "type": "options",
+      "options": [
+        {
+          "name": "Listar Todos",
+          "value": "getAll"
+        },
+        {
+          "name": "Buscar por ID",
+          "value": "getById"
+        },
+        {
+          "name": "Upload de Arquivo",
+          "value": "upload"
+        },
+        {
+          "name": "Excluir Arquivo",
+          "value": "delete"
+        },
+        {
+          "name": "Processar Arquivo",
+          "value": "process"
+        },
+        {
+          "name": "Listar Arquivos do Agente",
+          "value": "getAgentFiles"
+        },
+        {
+          "name": "Vincular Arquivo ao Agente",
+          "value": "linkToAgent"
+        },
+        {
+          "name": "Remover Arquivo do Agente",
+          "value": "removeFromAgent"
+        }
+      ],
+      "default": "getAll"
+    },
+    {
+      "displayName": "ID do Arquivo",
+      "name": "fileId",
+      "type": "string",
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "operation": ["getById", "delete", "process", "removeFromAgent"]
+        }
+      }
+    },
+    {
+      "displayName": "Nome do Arquivo",
+      "name": "name",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": ["upload"]
+        }
+      }
+    },
+    {
+      "displayName": "Conteúdo do Arquivo",
+      "name": "content",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": ["upload"]
+        }
+      }
+    },
+    {
+      "displayName": "ID do Agente",
+      "name": "agentId",
+      "type": "string",
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "operation": ["getAgentFiles", "linkToAgent", "removeFromAgent"]
+        }
+      }
+    }
+  ]
+}

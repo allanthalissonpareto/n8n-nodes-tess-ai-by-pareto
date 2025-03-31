@@ -1,0 +1,58 @@
+{
+  "name": "agents",
+  "displayName": "Tess Agents",
+  "group": ["transform"],
+  "version": 1,
+  "description": "Interage com agentes da Tess AI",
+  "defaults": {
+    "name": "Tess Agents",
+    "color": "#00b894"
+  },
+  "inputs": ["main"],
+  "outputs": ["main"],
+  "credentials": [
+    {
+      "name": "tessApi",
+      "required": true
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Operation",
+      "name": "operation",
+      "type": "options",
+      "options": [
+        {
+          "name": "List All Agents",
+          "value": "getAll"
+        },
+        {
+          "name": "Get Agent by ID",
+          "value": "getById"
+        },
+        {
+          "name": "Execute Agent",
+          "value": "execute"
+        },
+        {
+          "name": "Get Agent Response",
+          "value": "getResponse"
+        }
+      ],
+      "default": "getAll",
+      "description": "Ação a ser executada"
+    },
+    {
+      "displayName": "Agent ID",
+      "name": "agentId",
+      "type": "string",
+      "default": "",
+      "required": false,
+      "displayOptions": {
+        "show": {
+          "operation": ["getById", "execute", "getResponse"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "name": "webhooks",
+  "displayName": "Tess Webhooks",
+  "group": ["output"],
+  "version": 1,
+  "description": "Gerencia webhooks globais e por agente na Tess AI",
+  "defaults": {
+    "name": "Tess Webhooks",
+    "color": "#6c5ce7"
+  },
+  "inputs": ["main"],
+  "outputs": ["main"],
+  "credentials": [
+    {
+      "name": "tessApi",
+      "required": true
+    }
+  ],
+  "properties": [
+    {
+      "displayName": "Operação",
+      "name": "operation",
+      "type": "options",
+      "options": [
+        {
+          "name": "Listar Todos os Webhooks",
+          "value": "getAll"
+        },
+        {
+          "name": "Deletar Webhook",
+          "value": "delete"
+        },
+        {
+          "name": "Listar Webhooks de um Agente",
+          "value": "getAgentWebhooks"
+        },
+        {
+          "name": "Criar Webhook para Agente",
+          "value": "createAgentWebhook"
+        }
+      ],
+      "default": "getAll"
+    },
+    {
+      "displayName": "Webhook ID",
+      "name": "webhookId",
+      "type": "string",
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "operation": ["delete"]
+        }
+      }
+    },
+    {
+      "displayName": "Agent ID",
+      "name": "agentId",
+      "type": "string",
+      "default": "",
+      "displayOptions": {
+        "show": {
+          "operation": ["getAgentWebhooks", "createAgentWebhook"]
+        }
+      }
+    },
+    {
+      "displayName": "Webhook URL",
+      "name": "url",
+      "type": "string",
+      "default": "",
+      "required": true,
+      "displayOptions": {
+        "show": {
+          "operation": ["createAgentWebhook"]
+        }
+      }
+    }
+  ]
+}
