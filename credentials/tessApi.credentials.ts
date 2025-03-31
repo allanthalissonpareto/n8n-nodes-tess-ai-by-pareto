@@ -10,7 +10,7 @@ export class TessApi implements ICredentialType {
 		{
 			displayName: 'API Key',
 			name: 'apiKey',
-			type: 'string' as NodePropertyTypes,
+			type: 'string',
 			default: '',
 		},
 	];
