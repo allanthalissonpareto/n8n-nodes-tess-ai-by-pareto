@@ -1,24 +1,39 @@
 {
   "name": "n8n-nodes-tess-ai-by-pareto",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "Community node for integrating Tess AI with n8n",
-  "author": {
-    "name": "Pareto",
-    "email": "allan.thalisson@pareto.plus"
-  },
-  "license": "MIT",
   "keywords": [
     "n8n",
-    "workflow",
-    "automation",
     "tess",
     "ai",
-    "node",
+    "workflow",
+    "automation",
     "n8n-community-node-package"
   ],
+  "license": "MIT",
+  "homepage": "https://github.com/allanthalissonpareto/n8n-nodes-tess-ai-by-pareto",
+  "author": {
+    "name": "Allan Thalisson",
+    "email": "allan.thalisson@pareto.plus"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pareto-io/n8n-nodes-tess-ai-by-pareto"
+    "url": "https://github.com/allanthalissonpareto/n8n-nodes-tess-ai-by-pareto.git"
+  },
+  "engines": {
+    "node": ">=18.10",
+    "pnpm": ">=9.1"
+  },
+  "packageManager": "pnpm@9.1.4",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "rimraf dist && tsc && gulp",
+    "dev": "tsc --watch",
+    "format": "prettier nodes credentials --write",
+    "lint": "eslint nodes credentials package.json",
+    "lintfix": "eslint nodes credentials package.json --fix",
+    "prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes credentials package.json"
   },
   "files": [
     "dist"
@@ -26,35 +41,24 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "./dist/credentials/tessApi.credentials.js"
+      "dist/credentials/tessApi.credentials.js"
     ],
     "nodes": [
-      "./dist/nodes/Agents/agents.node.js",
-      "./dist/nodes/Files/files.node.js",
-      "./dist/nodes/Webhooks/webhooks.node.js"
+      "dist/nodes/Agents/agents.node.js",
+      "dist/nodes/Files/files.node.js",
+      "dist/nodes/Webhooks/webhooks.node.js"
     ]
   },
-  "scripts": {
-    "build": "rimraf dist && tsc && gulp",
-    "lint": "eslint ./nodes --ext .ts",
-    "format": "prettier --write \"**/*.{js,ts,json}\""
-  },
   "devDependencies": {
-    "@types/node": "^18.15.11",
+    "@typescript-eslint/parser": "^7.15.0",
     "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n8n-nodes-base": "^1.4.1",
-    "n8n-workflow": "^1.82.0",
-    "prettier": "^3.2.5",
+    "eslint-plugin-n8n-nodes-base": "^1.16.1",
+    "gulp": "^4.0.2",
+    "prettier": "^3.3.2",
     "rimraf": "^5.0.5",
-    "typescript": "^5.3.3",
-    "gulp": "^4.0.2"
+    "typescript": "^5.5.3"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
